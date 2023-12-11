@@ -88,10 +88,10 @@
 - **Тело запроса:**
   ```json
     {
-        "carBodyId": 2,
-        "carWheelId": 3,
-        "numberOfWheels": 4,
-        "coolName": "test1"
+       "carBodyId": 2,
+       "carWheelId": 3,
+       "numberOfWheels": 4,
+       "coolName": "test1"
     }  
 
 - **Формат ответа:**
@@ -117,3 +117,12 @@
 - **Endpoint:** `/api/cars/getCarById/{id}`
 - **HTTP Method:** `GET`
 - **Описание:**  Возвращает полную информацию о существующем автомобиле.
+- **Формат овета:**
+   ```json
+  {
+      "id": 52,
+      "carBodyName": "Hatchback",
+      "carWheelName": "R17",
+      "numberOfWheels": 3,
+      "coolName": "test"
+  }
