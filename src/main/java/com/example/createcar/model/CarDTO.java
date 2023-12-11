@@ -10,12 +10,7 @@ public class CarDTO {
     private int numberOfWheels;
     private String coolName;
 
-    public CarDTO(String carBodyName, String carWheelName, int numberOfWheels, String coolName) {
-        this.carBodyName = carBodyName;
-        this.carWheelName = carWheelName;
-        this.numberOfWheels = numberOfWheels;
-        this.coolName = coolName;
-    }
+
     public CarDTO(Long id, String carBodyName, String carWheelName, int numberOfWheels, String coolName) {
         this.id = id;
         this.carBodyName = carBodyName;

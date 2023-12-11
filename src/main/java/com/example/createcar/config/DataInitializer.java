@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
+
     private final CarBodyRepository carBodyRepository;
     private final CarWheelRepository carWheelRepository;
 
@@ -25,6 +26,7 @@ class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
+        // Инициализация данных для CarBody, если они отсутствуют в бд
         if (!carBodyRepository.existsById(1L)) {
             carBodyRepository.save(new CarBody("Hatchback"));
         }
@@ -35,11 +37,13 @@ class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
         int additionalQuantity = 15;
 
+        // Инициализация данных для CarWheel, если отсутвуют в бд
         if (!carWheelRepository.existsById(1L)) {
             carWheelRepository.save(new CarWheel("R15", additionalQuantity));
         } else {
             CarWheel existingWheel = carWheelRepository.findById(1L).orElse(null);
             if (existingWheel != null) {
+                // проверка на количество колес в наличии и последующее добавления этих колес в БД
                 if(existingWheel.getAvailableQuantity() < 3){
                     existingWheel.setAvailableQuantity(existingWheel.getAvailableQuantity() + additionalQuantity);
                     carWheelRepository.save(existingWheel);

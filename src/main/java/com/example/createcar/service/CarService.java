@@ -30,27 +30,29 @@ public class CarService {
     }
 
 
+
     public Car createCar(CarRequest carRequest) {
         CarBody carBody = carBodyRepository.findById(carRequest.getCarBodyId()).orElse(null);
         CarWheel carWheel = carWheelRepository.findById(carRequest.getCarWheelId()).orElse(null);
 
         if (carBody != null && carWheel != null) {
 
-            if (carWheel.getAvailableQuantity() < 2) {
+            //проверка на определенное количество колес в наличии
+            if (carWheel.getAvailableQuantity() < 3) {
 
                 carWheel.setAvailableQuantity(carWheel.getAvailableQuantity() + 10);
                 carWheelRepository.save(carWheel);
 
             }
 
-            if (carWheel.getAvailableQuantity() >= carRequest.getNumberOfWheels()) {
+            if (carWheel.getAvailableQuantity() >= carRequest.getNumberOfWheels() && carRequest.getNumberOfWheels() == 4){
 
                 carWheel.setAvailableQuantity(carWheel.getAvailableQuantity() - carRequest.getNumberOfWheels());
 
                 Car car = new Car(carBody, carWheel, carRequest.getNumberOfWheels(), carRequest.getCoolName());
                 return carRepository.save(car);
             } else {
-                throw new IllegalArgumentException("Недостаточно колес нужного размера.");
+                throw new IllegalArgumentException("Колес на машине должно быть строго 4 штуки.");
             }
         } else {
                 throw new IllegalArgumentException("Корпус или колесо с заданным ID не найдено.");
