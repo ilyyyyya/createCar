@@ -33,7 +33,7 @@ class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
             carBodyRepository.save(new CarBody("Sedan"));
         }
 
-        int additionalQuantity = 5;
+        int additionalQuantity = 15;
 
         if (!carWheelRepository.existsById(1L)) {
             carWheelRepository.save(new CarWheel("R15", additionalQuantity));
