@@ -40,13 +40,15 @@ public class CarService {
             //проверка на определенное количество колес в наличии
             if (carWheel.getAvailableQuantity() < 3) {
 
+                //если не хватает, то добавляется еще 10 колес в БД
                 carWheel.setAvailableQuantity(carWheel.getAvailableQuantity() + 10);
                 carWheelRepository.save(carWheel);
 
             }
-
+            //создание машины с определенными данными, который ввел пользователь
             if (carWheel.getAvailableQuantity() >= carRequest.getNumberOfWheels() && carRequest.getNumberOfWheels() == 4){
 
+                //убирается из БД определенное кол-во колес
                 carWheel.setAvailableQuantity(carWheel.getAvailableQuantity() - carRequest.getNumberOfWheels());
 
                 Car car = new Car(carBody, carWheel, carRequest.getNumberOfWheels(), carRequest.getCoolName());
